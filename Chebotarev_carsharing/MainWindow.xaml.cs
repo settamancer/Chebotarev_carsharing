@@ -24,5 +24,39 @@ namespace Chebotarev_carsharing
         {
             InitializeComponent();
         }
+        private void txtUsername_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            // Если текст все еще "Логин", очищаем и делаем черным
+            if (tb.Text == "Логин")
+            {
+                tb.Text = "";
+                tb.Foreground = Brushes.Black;
+            }
+        }
+
+        private void txtUsername_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            // Если пользователь ничего не ввел, возвращаем подсказку
+            if (string.IsNullOrEmpty(tb.Text))
+            {
+                tb.Text = "Логин";
+                tb.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (txtPassword.SecurePassword.Length > 0 )
+            {
+                lblPasswordHint.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                lblPasswordHint.Visibility = Visibility.Visible;
+            }
+        }
     }
+
 }
